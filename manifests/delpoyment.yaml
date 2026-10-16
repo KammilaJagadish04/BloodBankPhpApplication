@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydeployment
+  namespace: jaggu  
+spec:
+  replicas: 3
+  selector:
+     matchLabels:
+       app: myapp
+    template:
+      metadata:
+        lables:
+          app: myapp
+      spec:
+        containers: 
+          - name: cont1
+            image: jkammila/clientapp:appimage
+            ports:
+              - containerPort: 80
+            imagePullSecret:
+              - name: mysecret
+            resources:
+              requests:
+                cpu: "100m"
+                memory: "50Mi"
+              limits: 
+                cpu: "200m"
+                memory: "10Mi"
