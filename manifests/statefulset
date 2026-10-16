@@ -1,0 +1,21 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadataL
+  name: mysql
+spec:
+  replicas: 3
+  selector: 
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: mycont
+          images: jkammila/client:dbimage
+          ports:
+            - containerPort: 80
+            
