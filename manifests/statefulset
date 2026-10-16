@@ -17,5 +17,23 @@ spec:
         - name: mycont
           images: jkammila/client:dbimage
           ports:
-            - containerPort: 80
-            
+            - containerPort: 3306
+          imagePullSecret:
+            - name: mysecret
+          volumeMounts:
+            mountPath: /usr/share/nginx/html
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "50Mi"
+           limits: 
+              cpu: "200m"
+              memory: "10Mi"
+    VolumeClaimTemplate:
+    - metadata: 
+        name: www
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests: 
+            storage: 1Gi
