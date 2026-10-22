@@ -23,13 +23,7 @@ spec:
             - name: mysecret
           volumeMounts:
             mountPath: /usr/share/nginx/html
-          resources:
-            requests:
-              cpu: "100m"
-              memory: "50Mi"
-           limits: 
-              cpu: "200m"
-              memory: "10Mi"
+         
     VolumeClaimTemplate:
     - metadata: 
         name: www
