@@ -4,7 +4,8 @@ metadata:
   name: mysql
 
 spec:
-  serviceName: mysql
+  serviceName: mysqldb
+
   replicas: 3
 
   selector:
@@ -38,3 +39,7 @@ spec:
     spec:
       accessModes:
       - ReadWriteOnce
+
+      resources:
+        requests:
+          storage: 1Gi
