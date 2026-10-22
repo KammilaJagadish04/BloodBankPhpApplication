@@ -1,34 +1,44 @@
----
 apiVersion: apps/v1
 kind: StatefulSet
-metadataL
+metadata:
   name: mysql
+
 spec:
-  serviceName: "mysql"
+  serviceName: mysql
   replicas: 3
-  selector: 
+
+  selector:
     matchLabels:
       app: myapp
+
   template:
     metadata:
       labels:
         app: myapp
+
     spec:
+      imagePullSecrets:
+      - name: dockerhub-secret
+
       containers:
-        - name: mycont
-          images: jkammila/client:dbimage
-          ports:
-            - containerPort: 3306
-          imagePullSecret:
-            - name: dockerhub-secret 
-          volumeMounts:
-            mountPath: /usr/share/nginx/html
-         
-    VolumeClaimTemplate:
-    - metadata: 
-        name: www
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        resources:
-          requests: 
-            storage: 1Gi
+      - name: mycont
+        image: jkammila/client:dbimage
+
+        ports:
+        - containerPort: 3306
+
+        volumeMounts:
+        - name: www
+          mountPath: /usr/share/nginx/html
+
+  volumeClaimTemplates:
+  - metadata:
+      name: www
+
+    spec:
+      accessModes:
+      - ReadWriteOnce
+
+      resources:
+        requests:
+          storage: 1Gi
