@@ -1,24 +1,27 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mydeployment
- 
+
 spec:
   replicas: 3
+
   selector:
-     matchLabels:
-       app: myapp
-    template:
-      metadata:
-        lables:
-          app: myapp
-      spec:
-        containers: 
-          - name: cont1
-            image: jkammila/clientapp:appimage
-            ports:
-              - containerPort: 80
-            imagePullSecret:
-              - name: dockerhub-secret 
-           
+    matchLabels:
+      app: myapp
+
+  template:
+    metadata:
+      labels:
+        app: myapp
+
+    spec:
+      imagePullSecrets:
+      - name: dockerhub-secret
+
+      containers:
+      - name: cont1
+        image: jkammila/clientapp:appimage
+
+        ports:
+        - containerPort: 80
