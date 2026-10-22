@@ -21,7 +21,7 @@ spec:
 
       containers:
       - name: cont1
-        image: jkammila/clientapp:appimage
+        image: jagadishkammila04/clientapp:appimage
 
         ports:
         - containerPort: 80
